@@ -3,8 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:pdfConverter.WPF.Views"
+        xmlns:design="clr-namespace:simplePdfConverter.WPF.DesignTime.Models" 
+        xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
         mc:Ignorable="d" FontSize="16"
+        d:DataContext="{d:DesignInstance Type=design:DesignShellViewModel, IsDesignTimeCreatable=True}"
+        cal:Bind.AtDesignTime="True"
         Title="ShellView" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>

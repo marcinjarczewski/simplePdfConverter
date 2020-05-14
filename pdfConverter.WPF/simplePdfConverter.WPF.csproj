@@ -81,6 +81,7 @@
     <Compile Include="Bootstrappers\BaseModule.cs" />
     <Compile Include="Bootstrappers\BaseShell.cs" />
     <Compile Include="Bootstrappers\ShellInstaller.cs" />
+    <Compile Include="DesignTime\Models\DesignShellViewModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
