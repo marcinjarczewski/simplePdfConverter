@@ -78,7 +78,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrappers\ModuleLoader.cs" />
-    <Compile Include="Bootstrappers\BaseModule.cs" />
+    <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="Bootstrappers\BaseShell.cs" />
     <Compile Include="Bootstrappers\ShellInstaller.cs" />
     <Compile Include="DesignTime\Models\DesignShellViewModel.cs" />

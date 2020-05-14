@@ -41,10 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IModule.cs" />
-    <Compile Include="ShellMenuItem.cs" />
-    <Compile Include="IShell.cs" />
+    <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Bootstrappers\ShellMenuItem.cs" />
+    <Compile Include="Bootstrappers\IShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Db\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

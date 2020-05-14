@@ -6,7 +6,7 @@ using pdfConverter.WPF.ViewModels;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace pdfConverter.WPF.Bootstrappers
+namespace pdfConverter.WPF.Modules
 {
     public class BaseModule : IModule
     {
