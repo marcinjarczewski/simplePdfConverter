@@ -3,6 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using pdfConverter.Contracts;
 using pdfConverter.WPF.ViewModels;
+using simplePdfConverter.WPF.Modules;
 
 namespace pdfConverter.WPF.Bootstrappers
 {

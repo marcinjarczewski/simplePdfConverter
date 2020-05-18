@@ -83,6 +83,12 @@
     <Compile Include="Bootstrappers\ShellInstaller.cs" />
     <Compile Include="DesignTime\Models\DesignShellViewModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Themes\Brushes.xaml.cs">
+      <DependentUpon>Brushes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\AppStyle.xaml.cs">
+      <DependentUpon>AppStyle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -128,6 +134,14 @@
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\AppStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

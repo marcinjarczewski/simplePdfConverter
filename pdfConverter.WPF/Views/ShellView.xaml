@@ -14,7 +14,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="MenuItems" Grid.Row="0">
+        <ListBox x:Name="MenuItems" BorderThickness="0" Style="{StaticResource NavListBox}" ItemContainerStyle="{StaticResource NavListBoxItem}"  Grid.Row="0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" >
@@ -23,7 +23,7 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Margin="5,0,5,0" Text="{Binding Caption}"></TextBlock>
+                    <TextBlock Padding="5,0,5,0" Text="{Binding Caption}"></TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

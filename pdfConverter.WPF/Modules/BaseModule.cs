@@ -1,12 +1,7 @@
-﻿using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Windsor;
-using pdfConverter.Contracts;
+﻿using pdfConverter.Contracts;
 using pdfConverter.WPF.ViewModels;
-using System.Collections.Generic;
-using System.Reflection;
 
-namespace pdfConverter.WPF.Modules
+namespace simplePdfConverter.WPF.Modules
 {
     public class BaseModule : IModule
     {
@@ -23,8 +18,8 @@ namespace pdfConverter.WPF.Modules
 
         public void Init()
         {
-            _shell.MenuItems.Add(new ShellMenuItem() { Caption = "First", ScreenViewModel = _mainViewModel });
-            _shell.MenuItems.Add(new ShellMenuItem() { Caption = "Second", ScreenViewModel = _settingsViewModel });
+            _shell.MenuItems.Add(new ShellMenuItem() { Caption = "Convert", ScreenViewModel = _mainViewModel });
+            _shell.MenuItems.Add(new ShellMenuItem() { Caption = "Settings", ScreenViewModel = _settingsViewModel });
         }
     }
 }
