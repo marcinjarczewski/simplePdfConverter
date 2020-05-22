@@ -16,5 +16,9 @@ namespace pdfConverter.Contracts.Db
         void AddLog(DbLogDto log);
 
         DbLogDto GetLog(int logId);
+
+        DbConfigDto GetConfig();
+
+        void SaveConfig(DbConfigDto config);
     }
 }

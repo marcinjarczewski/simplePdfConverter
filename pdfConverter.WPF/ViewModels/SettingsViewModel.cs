@@ -1,6 +1,9 @@
-﻿using Caliburn.Micro;
+﻿using AutoMapper;
+using Caliburn.Micro;
 using Microsoft.Win32;
 using pdfConverter.Contracts;
+using pdfConverter.Contracts.Db;
+using simplePdfConverter.Contracts.Db;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,24 +16,43 @@ namespace pdfConverter.WPF.ViewModels
 {
     public class SettingsViewModel
     {
-        private readonly IShell _shell;
+        private readonly IDbAccess _database;
+        private readonly IMapper _mapper;
 
-        public SettingsViewModel(IShell shell)
+        private string _SourceFolderPath;
+
+        public string SourceFolderPath
         {
-            _shell = shell;
+            get { return _SourceFolderPath; }
+            set { _SourceFolderPath = value; }
         }
 
-        public void Load()
-        {
-            var dlg = new OpenFileDialog();
+        private string _TargetFolderPath;
 
-            if (dlg.ShowDialog().GetValueOrDefault())
+        public string TargetFolderPath
+        {
+            get { return _TargetFolderPath; }
+            set { _TargetFolderPath = value; }
+        }
+
+
+        public SettingsViewModel(IMapper mapper, IDbAccess db)
+        {
+            _database = db;
+            _mapper = mapper;
+            var config = db.GetConfig();           
+            SourceFolderPath = config.SourceFolderPath;
+            TargetFolderPath = config.TargetFolderPath;
+        }
+
+        public void Save()
+        {
+            var config = new DbConfigDto
             {
-                var asm = Assembly.LoadFrom(dlg.FileName);
-                var module = _shell.LoadModule(asm);
-                if (module != null)
-                    module.Init();
-            }
+                SourceFolderPath = SourceFolderPath,
+                TargetFolderPath = TargetFolderPath
+            };
+            _database.SaveConfig(config);
         }
     }
 }

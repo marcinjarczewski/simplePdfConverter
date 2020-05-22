@@ -15,6 +15,7 @@ namespace pdfConverter.WPF.Bootstrappers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             var mapper = Automapper.Init();
+
             container
                 .Register(Component.For<IWindsorContainer>().Instance(container))
                 .Register(Component.For<ModuleLoader>())
@@ -26,7 +27,6 @@ namespace pdfConverter.WPF.Bootstrappers
 
                 .Register(Component.For<IMapper>().Instance(mapper))
                 .Register(Component.For<IDbAccess>().ImplementedBy<DbAccess>());
-
         }
     }
 }

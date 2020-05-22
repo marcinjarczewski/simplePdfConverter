@@ -15,6 +15,5 @@ namespace pdfConverter.WPF.ViewModels
         {
             _database = db;
         }
-
     }
 }

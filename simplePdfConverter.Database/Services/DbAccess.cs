@@ -16,6 +16,7 @@ namespace simplePdfConverter.Database.Services
         public DbAccess(IMapper mapper)
         {
             _mapper = mapper;
+            Init();
         }
 
         static object locker = new object();
@@ -24,6 +25,9 @@ namespace simplePdfConverter.Database.Services
             return new SQLiteConnection("converterDB");
         }
 
+        /// <summary>
+        /// Create tables and init config
+        /// </summary>
         public void Init()
         {
             var database = GetConnection();
@@ -35,8 +39,8 @@ namespace simplePdfConverter.Database.Services
                 {
                     AutoSave = false,
                     Id = 1,
-                    SourcePath = "",
-                    TargetPath = ""
+                    SourceFolderPath = "",
+                    TargetFolderPath = ""
                 });
             }        
             database.Commit();
@@ -66,6 +70,27 @@ namespace simplePdfConverter.Database.Services
             var database = GetConnection();
             var model = database.Table<DbLogModel>().FirstOrDefault(f => f.Id == logId);
             return _mapper.Map<DbLogDto>(model);
+        }
+
+        /// <summary>
+        /// Get single record from db. Only 1 record is used by config.
+        /// </summary>
+        /// <returns>Settings</returns>
+        public DbConfigDto GetConfig()
+        {
+            var database = GetConnection();
+            var model = database.Table<DbConfigModel>().FirstOrDefault();
+            return _mapper.Map<DbConfigDto>(model);
+        }
+
+        public void SaveConfig(DbConfigDto config)
+        {
+            var database = GetConnection();
+            var model = database.Table<DbConfigModel>().FirstOrDefault() ?? new DbConfigModel();
+            model.TargetFolderPath = config.TargetFolderPath;
+            model.SourceFolderPath = config.SourceFolderPath;
+            database.Update(model);
+            database.Commit();
         }
     }
 }

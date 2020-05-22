@@ -13,7 +13,6 @@ namespace pdfConverter.WPF.Bootstrappers
 {
     public static class Automapper
     {
-        //public static IMapper Mapper;
         public static IMapper Init()
         {
             var _configuraton = new MapperConfiguration(cfg =>

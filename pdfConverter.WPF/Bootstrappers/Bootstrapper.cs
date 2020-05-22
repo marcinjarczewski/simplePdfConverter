@@ -21,7 +21,6 @@ namespace pdfConverter.WPF.Bootstrappers
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
             Automapper.Init();
-            simplePdfConverter.Domain.Automapper.Init();
             var loader = _container.Resolve<ModuleLoader>();
 
             var exeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
