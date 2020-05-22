@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>pdfConverter.WPF</RootNamespace>
     <AssemblyName>pdfConverter.WPF</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Micro.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\pdfConverter\packages\Caliburn.Micro.Core.4.0.105-alpha\lib\net45\Caliburn.Micro.Core.dll</HintPath>
     </Reference>
@@ -77,6 +81,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bootstrappers\AutomapperImplementation.cs" />
+    <Compile Include="Bootstrappers\Automapper.cs" />
     <Compile Include="Bootstrappers\ModuleLoader.cs" />
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="Bootstrappers\BaseShell.cs" />
@@ -159,6 +165,14 @@
     <ProjectReference Include="..\pdfConverter.Contracts\simplePdfConverter.Contracts.csproj">
       <Project>{BB5C802A-2A11-4B0B-AF3A-50E4E56DEE9F}</Project>
       <Name>simplePdfConverter.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\pdfconverter.Domain\simplePdfConverter.Domain.csproj">
+      <Project>{5844bccf-e023-4e58-b40a-b9367f554a8b}</Project>
+      <Name>simplePdfConverter.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\simplePdfConverter.Database\simplePdfConverter.Database.csproj">
+      <Project>{86320426-3309-44af-bda6-7534778257b3}</Project>
+      <Name>simplePdfConverter.Database</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

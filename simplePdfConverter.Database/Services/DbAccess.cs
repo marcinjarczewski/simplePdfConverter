@@ -1,23 +1,32 @@
-﻿using simplePdfConverter.Database.DbModels;
+﻿using AutoMapper;
+using pdfConverter.Contracts.Db;
+using simplePdfConverter.Contracts.Db;
+using simplePdfConverter.Database.DbModels;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace simplePdfConverter.Database.Servicess
+namespace simplePdfConverter.Database.Services
 {
-    public static class DbAccess
+    public class DbAccess : IDbAccess
     {
+        private IMapper _mapper;
+
+        public DbAccess(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
         static object locker = new object();
-        private static SQLiteConnection GetConnection()
+        private SQLiteConnection GetConnection()
         {
             return new SQLiteConnection("converterDB");
         }
 
-        public static void Init()
+        public void Init()
         {
             var database = GetConnection();
-            //Drop();
             database.CreateTable<DbLogModel>();
             database.CreateTable<DbConfigModel>();         
             if (database.Table<DbConfigModel>().FirstOrDefault(u => u.Id == 1) == null)
@@ -33,7 +42,7 @@ namespace simplePdfConverter.Database.Servicess
             database.Commit();
         }
 
-        public static void Drop()
+        public void Drop()
         {
             var database = GetConnection();
             database.DropTable<DbLogModel>();
@@ -41,23 +50,22 @@ namespace simplePdfConverter.Database.Servicess
             database.Commit();
         }
 
-        public static void AddLog(DbLogModel log)
+        public void AddLog(DbLogDto log)
         {
+            var logModel = _mapper.Map<DbLogModel>(log);
             var database = GetConnection();
             lock (locker)
             {
-                database.Insert(log);
+                database.Insert(logModel);
                 database.Commit();
             }
         }
-        public static void DeleteLogs(List<DbLogModel> logs)
+
+        public DbLogDto GetLog(int logId)
         {
             var database = GetConnection();
-            foreach (var item in logs)
-            {
-                database.Delete(item);
-            }
-            database.Commit();
+            var model = database.Table<DbLogModel>().FirstOrDefault(f => f.Id == logId);
+            return _mapper.Map<DbLogDto>(model);
         }
     }
 }

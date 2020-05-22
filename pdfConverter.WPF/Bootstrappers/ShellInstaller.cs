@@ -1,8 +1,11 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using AutoMapper;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using pdfConverter.Contracts;
+using pdfConverter.Contracts.Db;
 using pdfConverter.WPF.ViewModels;
+using simplePdfConverter.Database.Services;
 using simplePdfConverter.WPF.Modules;
 
 namespace pdfConverter.WPF.Bootstrappers
@@ -11,6 +14,7 @@ namespace pdfConverter.WPF.Bootstrappers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            var mapper = Automapper.Init();
             container
                 .Register(Component.For<IWindsorContainer>().Instance(container))
                 .Register(Component.For<ModuleLoader>())
@@ -18,7 +22,11 @@ namespace pdfConverter.WPF.Bootstrappers
                 .Register(Component.For<SettingsViewModel>())
                 .Register(Component.For<IModule>().ImplementedBy<BaseModule>())
                 .Register(Component.For<IShell>().ImplementedBy<BaseShell>())
-                .Register(Component.For<ShellViewModel>() /*.LifeStyle.Singleton*/);
+                .Register(Component.For<ShellViewModel>() /*.LifeStyle.Singleton*/)
+
+                .Register(Component.For<IMapper>().Instance(mapper))
+                .Register(Component.For<IDbAccess>().ImplementedBy<DbAccess>());
+
         }
     }
 }
