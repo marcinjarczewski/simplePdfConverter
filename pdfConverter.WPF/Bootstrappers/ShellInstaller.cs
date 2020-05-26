@@ -5,7 +5,9 @@ using Castle.Windsor;
 using pdfConverter.Contracts;
 using pdfConverter.Contracts.Db;
 using pdfConverter.WPF.ViewModels;
+using simplePdfConverter.Contracts.Bootstrappers;
 using simplePdfConverter.Database.Services;
+using simplePdfConverter.WPF.Bootstrappers;
 using simplePdfConverter.WPF.Modules;
 
 namespace pdfConverter.WPF.Bootstrappers

@@ -66,9 +66,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Db\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\pdfConverter.Contracts\simplePdfConverter.Contracts.csproj">
       <Project>{bb5c802a-2a11-4b0b-af3a-50e4e56dee9f}</Project>

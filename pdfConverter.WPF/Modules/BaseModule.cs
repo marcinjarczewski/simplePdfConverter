@@ -1,5 +1,7 @@
 ﻿using pdfConverter.Contracts;
 using pdfConverter.WPF.ViewModels;
+using simplePdfConverter.Contracts;
+using simplePdfConverter.Contracts.Bootstrappers;
 
 namespace simplePdfConverter.WPF.Modules
 {

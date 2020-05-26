@@ -1,8 +1,10 @@
-﻿namespace pdfConverter.Contracts
+﻿using simplePdfConverter.Contracts.Bootstrappers;
+
+namespace simplePdfConverter.Contracts
 {
     public class ShellMenuItem
     {
         public string Caption { get; set; }
-        public object ScreenViewModel { get; set; }
+        public IScreenViewModel ScreenViewModel { get; set; }
     }
 }

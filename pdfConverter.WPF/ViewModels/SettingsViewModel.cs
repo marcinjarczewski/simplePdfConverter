@@ -3,6 +3,7 @@ using Caliburn.Micro;
 using Microsoft.Win32;
 using pdfConverter.Contracts;
 using pdfConverter.Contracts.Db;
+using simplePdfConverter.Contracts.Bootstrappers;
 using simplePdfConverter.Contracts.Db;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace pdfConverter.WPF.ViewModels
 {
-    public class SettingsViewModel
+    public class SettingsViewModel : IScreenViewModel
     {
         private readonly IDbAccess _database;
         private readonly IMapper _mapper;
@@ -35,12 +36,23 @@ namespace pdfConverter.WPF.ViewModels
             set { _TargetFolderPath = value; }
         }
 
-
+        /// <summary>
+        /// Calls just once.
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="mapper"></param>
         public SettingsViewModel(IMapper mapper, IDbAccess db)
         {
             _database = db;
             _mapper = mapper;
-            var config = db.GetConfig();           
+        }
+
+        /// <summary>
+        /// Calls every time when view is activated.
+        /// </summary>
+        public void Init()
+        {
+            var config = _database.GetConfig();
             SourceFolderPath = config.SourceFolderPath;
             TargetFolderPath = config.TargetFolderPath;
         }

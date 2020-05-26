@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using pdfConverter.Contracts;
+using System.Collections.Generic;
 using System.Reflection;
 
-namespace pdfConverter.Contracts
+namespace simplePdfConverter.Contracts.Bootstrappers
 {
     public interface IShell
     {

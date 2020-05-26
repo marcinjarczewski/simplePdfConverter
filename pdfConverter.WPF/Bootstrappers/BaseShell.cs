@@ -2,11 +2,14 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using pdfConverter.Contracts;
+using pdfConverter.WPF.Bootstrappers;
 using pdfConverter.WPF.ViewModels;
+using simplePdfConverter.Contracts;
+using simplePdfConverter.Contracts.Bootstrappers;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace pdfConverter.WPF.Bootstrappers
+namespace simplePdfConverter.WPF.Bootstrappers
 {
     public class BaseShell : IShell
     {

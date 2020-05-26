@@ -1,5 +1,6 @@
 ﻿using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
@@ -7,69 +8,45 @@ namespace pdfconverter.Domain
 {
     public class Converter
     {
-        public string[] GetFiles()
+        public Image SingleFile(string sourcePath)
         {
-            string[] files =
-                Directory.GetFiles(@"F:\OneDrive\Projekty\pdfConverter\pdf", "*.pdf", SearchOption.TopDirectoryOnly);
-            return files;
+            if(File.Exists(sourcePath))
+            {
+                var doc = new Spire.Pdf.PdfDocument();
+                doc.LoadFromFile(sourcePath);
+                return doc.SaveAsImage(0);
+            }
+            return null;
         }
 
-        public string[] GetPDfs()
-        {
-            string[] files =
-                Directory.GetFiles(@"F:\OneDrive\Projekty\pdfConverter\pdf", "*.pdf", SearchOption.TopDirectoryOnly);
-            return files;
-        }
-
-        /// <summary>
-        /// Imports all pages from a list of documents.
-        /// </summary>
-        public void SplitPages()
+        public void SaveAsImage(string sourcePath, string targetPath)
         {
             // Get some file names
-            string[] files = GetFiles();
-            var name = @"F:\OneDrive\Projekty\pdfConverter\pdf";
-            int it = 1;
-            // Open the output document
-
+            string[] files = GetPDfs(sourcePath);
 
             // Iterate files
             foreach (string file in files)
             {
-                // Open the document to import pages from it.
-                PdfDocument inputDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import);
-
-                // Iterate pages
-                int count = inputDocument.PageCount;
-                for (int idx = 0; idx < count; idx++)
+                var name = Path.GetFileNameWithoutExtension(file);
+                var path = Path.GetDirectoryName(file);
+                if (File.Exists(Path.Combine(path, name + "_1".ToString() + ".jpg")))
                 {
-                    PdfDocument outputDocument = new PdfDocument();
-                    // Get the page from the external document...
-                    PdfPage page = inputDocument.Pages[idx];
-                    // ...and add it to the output document.
-                    outputDocument.AddPage(page);
-                    outputDocument.Save(name + it + ".pdf");
-                    it++;
+                    continue;
+                }
+                var doc = new Spire.Pdf.PdfDocument();
+                doc.LoadFromFile(file);
+                for (int it = 0; it < doc.Pages.Count; it++)
+                {
+                    var bmp = doc.SaveAsImage(it);                  
+                    bmp.Save(Path.Combine(path, name + "_" + (it + 1).ToString() + ".jpg"), ImageFormat.Jpeg);
                 }
             }
         }
-
-        public void SaveAsImage()
+        private string[] GetPDfs(string path)
         {
-            // Get some file names
-            string[] files = GetPDfs();
-            var name = @"F:\OneDrive\Projekty\pdfConverter\pdf\";
-            int it = 1;
-
-            // Iterate files
-            foreach (string file in files)
-            {
-                var doc = new Spire.Pdf.PdfDocument();
-                doc.LoadFromFile(file);
-                var bmp = doc.SaveAsImage(0);
-                bmp.Save(name + it + ".jpg", ImageFormat.Jpeg);
-                it++;
-            }
+            string[] files =
+                Directory.GetFiles(path, "*.pdf", SearchOption.TopDirectoryOnly);
+            return files;
         }
     }
 }

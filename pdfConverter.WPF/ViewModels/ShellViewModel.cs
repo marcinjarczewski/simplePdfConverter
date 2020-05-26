@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using pdfConverter.Contracts;
+using simplePdfConverter.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,7 +36,9 @@ namespace pdfConverter.WPF.ViewModels
         public object CurrentView
         {
             get {
-                return _selectedMenuItem == null ? MenuItems.FirstOrDefault()?.ScreenViewModel : _selectedMenuItem.ScreenViewModel;
+                var screenView = _selectedMenuItem == null ? MenuItems.FirstOrDefault()?.ScreenViewModel : _selectedMenuItem.ScreenViewModel;
+                screenView.Init();
+                return screenView;
             }
         }
     }
