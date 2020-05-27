@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
 using Microsoft.Win32;
+using Ookii.Dialogs.Wpf;
 using pdfConverter.Contracts;
 using pdfConverter.Contracts.Db;
 using simplePdfConverter.Contracts.Bootstrappers;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace pdfConverter.WPF.ViewModels
 {
-    public class SettingsViewModel : IScreenViewModel
+    public class SettingsViewModel : PropertyChangedBase, IScreenViewModel
     {
         private readonly IDbAccess _database;
         private readonly IMapper _mapper;
@@ -25,7 +26,7 @@ namespace pdfConverter.WPF.ViewModels
         public string SourceFolderPath
         {
             get { return _SourceFolderPath; }
-            set { _SourceFolderPath = value; }
+            set { _SourceFolderPath = value; NotifyOfPropertyChange(() => SourceFolderPath); }
         }
 
         private string _TargetFolderPath;
@@ -33,7 +34,7 @@ namespace pdfConverter.WPF.ViewModels
         public string TargetFolderPath
         {
             get { return _TargetFolderPath; }
-            set { _TargetFolderPath = value; }
+            set { _TargetFolderPath = value; NotifyOfPropertyChange(() => TargetFolderPath); }
         }
 
         /// <summary>
@@ -65,6 +66,24 @@ namespace pdfConverter.WPF.ViewModels
                 TargetFolderPath = TargetFolderPath
             };
             _database.SaveConfig(config);
+        }
+
+        public void SourceFolderPicker()
+        {
+            var dlg = new VistaFolderBrowserDialog();
+            if (dlg.ShowDialog() == true)
+            {
+                SourceFolderPath = dlg.SelectedPath;
+            }
+        }
+
+        public void TargetFolderPicker()
+        {
+            var dlg = new VistaFolderBrowserDialog();
+            if (dlg.ShowDialog() == true)
+            {
+                TargetFolderPath = dlg.SelectedPath;
+            }
         }
     }
 }

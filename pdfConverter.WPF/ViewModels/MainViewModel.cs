@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
+using Microsoft.Win32;
 using pdfconverter.Domain;
 using pdfConverter.Contracts;
 using pdfConverter.Contracts.Db;
@@ -12,7 +13,6 @@ namespace pdfConverter.WPF.ViewModels
 {
     public class MainViewModel : PropertyChangedBase, IScreenViewModel
     {
-        private Models.SettingsModel _settingsModel;
         private IDbAccess _database;
         private IMapper _mapper;
 
@@ -90,5 +90,16 @@ namespace pdfConverter.WPF.ViewModels
             img.Save(path);
             System.Diagnostics.Process.Start(path);
         }
+
+        public void SinglePdfPicker()
+        {
+            OpenFileDialog saveFileDialog = new OpenFileDialog();
+            saveFileDialog.Filter = "PDF (*.pdf)|*.pdf";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                SingleFile = saveFileDialog.FileName;
+            }
+        }
+
     }
 }

@@ -8,7 +8,7 @@
         mc:Ignorable="d" FontSize="16"
         d:DataContext="{d:DesignInstance Type=design:DesignShellViewModel, IsDesignTimeCreatable=True}"
         cal:Bind.AtDesignTime="True"
-        Title="ShellView" Height="450" Width="800">
+        Title="Simple PDF Converter" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
