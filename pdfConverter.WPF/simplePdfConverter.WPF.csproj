@@ -89,6 +89,8 @@
     </Compile>
     <Compile Include="Bootstrappers\Automapper.cs" />
     <Compile Include="Bootstrappers\ModuleLoader.cs" />
+    <Compile Include="DesignTime\Models\DesignDialogViewModel.cs" />
+    <Compile Include="Modules\Navigator.cs" />
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="Bootstrappers\BaseShell.cs" />
     <Compile Include="Bootstrappers\ShellInstaller.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Themes\AppStyle.xaml.cs">
       <DependentUpon>AppStyle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -111,6 +114,9 @@
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogView.xaml.cs">
+      <DependentUpon>DialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -167,6 +173,10 @@
     <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>

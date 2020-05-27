@@ -4,7 +4,6 @@ using Microsoft.Win32;
 using pdfconverter.Domain;
 using pdfConverter.Contracts;
 using pdfConverter.Contracts.Db;
-using pdfConverter.WPF.Models;
 using simplePdfConverter.Contracts.Bootstrappers;
 using System;
 using System.IO;
@@ -15,6 +14,7 @@ namespace pdfConverter.WPF.ViewModels
     {
         private IDbAccess _database;
         private IMapper _mapper;
+        private INavigator _navigator;
 
         private string _SingleFile;
 
@@ -49,10 +49,11 @@ namespace pdfConverter.WPF.ViewModels
         /// </summary>
         /// <param name="db"></param>
         /// <param name="mapper"></param>
-        public MainViewModel(IDbAccess db, IMapper mapper)
+        public MainViewModel(IDbAccess db, IMapper mapper, INavigator navigator)
         {
             _database = db;
             _mapper = mapper;
+            _navigator = navigator;
         }
         /// <summary>
         /// Calls every time when view is activated.
@@ -71,8 +72,16 @@ namespace pdfConverter.WPF.ViewModels
 
         public void ConvertPdfs()
         {
-            var converter = new Converter();
-            converter.SaveAsImage(SourcePath, TargetPath);
+            try
+            {
+                var converter = new Converter();
+                converter.SaveAsImage(SourcePath, TargetPath);
+                _navigator.ShowDialog("Confirmation", "PDFs converted.");
+            }
+            catch(Exception ex)
+            {
+                _navigator.ShowDialog("Error", ex.Message);
+            }
         }
 
         public bool CanConvertSinglePdf(string singleFile)
@@ -82,13 +91,20 @@ namespace pdfConverter.WPF.ViewModels
 
         public void ConvertSinglePdf(string singleFile)
         {
-            var converter = new Converter();
-            var img = converter.SingleFile(singleFile);
+            try
+            {
+                var converter = new Converter();
+                var img = converter.SingleFile(singleFile);
 
-            //save to temp and open in default image viewer
-            var path =string.Concat(Path.GetTempPath() , Guid.NewGuid().ToString() , ".png");
-            img.Save(path);
-            System.Diagnostics.Process.Start(path);
+                //save to temp and open in default image viewer
+                var path = string.Concat(Path.GetTempPath(), Guid.NewGuid().ToString(), ".png");
+                img.Save(path);
+                System.Diagnostics.Process.Start(path);
+            }
+            catch (Exception ex)
+            {
+                _navigator.ShowDialog("Error", ex.Message);
+            }
         }
 
         public void SinglePdfPicker()

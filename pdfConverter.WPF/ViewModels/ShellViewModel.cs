@@ -37,7 +37,7 @@ namespace pdfConverter.WPF.ViewModels
         {
             get {
                 var screenView = _selectedMenuItem == null ? MenuItems.FirstOrDefault()?.ScreenViewModel : _selectedMenuItem.ScreenViewModel;
-                screenView.Init();
+                screenView?.Init();
                 return screenView;
             }
         }

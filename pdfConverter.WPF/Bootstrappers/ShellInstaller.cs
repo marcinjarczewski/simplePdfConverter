@@ -28,6 +28,7 @@ namespace pdfConverter.WPF.Bootstrappers
                 .Register(Component.For<ShellViewModel>() /*.LifeStyle.Singleton*/)
 
                 .Register(Component.For<IMapper>().Instance(mapper))
+                .Register(Component.For<INavigator>().ImplementedBy<Navigator>())
                 .Register(Component.For<IDbAccess>().ImplementedBy<DbAccess>());
         }
     }

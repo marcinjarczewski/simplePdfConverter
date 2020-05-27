@@ -45,6 +45,7 @@
     <Compile Include="Db\DbLogDto.cs" />
     <Compile Include="Db\DbConfigDto.cs" />
     <Compile Include="Db\IDbAccess.cs" />
+    <Compile Include="Modules\INavigator.cs" />
     <Compile Include="Modules\IModule.cs" />
     <Compile Include="Bootstrappers\ShellMenuItem.cs" />
     <Compile Include="Bootstrappers\IShell.cs" />
