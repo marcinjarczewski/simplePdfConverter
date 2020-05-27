@@ -28,7 +28,7 @@ namespace pdfconverter.Domain
             foreach (string file in files)
             {
                 var name = Path.GetFileNameWithoutExtension(file);
-                var path = Path.GetDirectoryName(file);
+                var path = targetPath.Contains(".") ? Path.GetDirectoryName(targetPath) : targetPath;
                 if (File.Exists(Path.Combine(path, name + "_1".ToString() + ".jpg")))
                 {
                     continue;
