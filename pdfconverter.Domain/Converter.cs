@@ -1,5 +1,6 @@
 ﻿using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -8,7 +9,7 @@ namespace pdfconverter.Domain
 {
     public class Converter
     {
-        public Image SingleFile(string sourcePath)
+        public Image FirstPage(string sourcePath)
         {
             if(File.Exists(sourcePath))
             {
@@ -17,6 +18,26 @@ namespace pdfconverter.Domain
                 return doc.SaveAsImage(0);
             }
             return null;
+        }
+
+        public Image FirstPage(byte[] source)
+        {
+            var doc = new Spire.Pdf.PdfDocument();
+            doc.LoadFromBytes(source);
+            return doc.SaveAsImage(0);
+        }
+
+        public List<Image> SingleFile(byte[] source)
+        {
+            var result = new List<Image>();
+            var doc = new Spire.Pdf.PdfDocument();
+            doc.LoadFromBytes(source);
+            for (int it = 0; it < doc.Pages.Count; it++)
+            {
+                result.Add(doc.SaveAsImage(it));
+            }
+
+            return result;
         }
 
         public void SaveAsImage(string sourcePath, string targetPath)

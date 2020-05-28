@@ -94,7 +94,7 @@ namespace pdfConverter.WPF.ViewModels
             try
             {
                 var converter = new Converter();
-                var img = converter.SingleFile(singleFile);
+                var img = converter.FirstPage(singleFile);
 
                 //save to temp and open in default image viewer
                 var path = string.Concat(Path.GetTempPath(), Guid.NewGuid().ToString(), ".png");
